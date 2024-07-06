@@ -16,7 +16,14 @@ class MyThemeData {
           fontSize: 20,
           fontWeight: FontWeight.w700,
         )
-      )
+      ),
+      titleSmall: GoogleFonts.montserrat(
+        textStyle: const TextStyle(
+          color: Color(0xFF696F79),
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        )
+      ),
     )
   );
 }

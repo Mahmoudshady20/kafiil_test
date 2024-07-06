@@ -12,8 +12,9 @@ class LoginImage extends StatelessWidget {
           right: MediaQuery.of(context).size.width * 0.16,
           top: MediaQuery.of(context).size.width * 0.08,
         ),
-        child: Image.asset('assets/images/img.png',
-        width: 255,
+        child: Image.asset(
+          'assets/images/img.png',
+          width: 255,
           height: 255,
         ),
       ),

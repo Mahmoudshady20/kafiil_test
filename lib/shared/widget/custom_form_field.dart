@@ -13,13 +13,13 @@ class CustomFormField extends StatelessWidget {
   final TextInputType textInputType;
   final int lines;
   final MyValidator validator;
-  final double? radius;
+  final double paddingHorizontal;
   final bool? isLogin;
   const CustomFormField(
       {super.key,required this.label,
         this.hint,
         this.isLogin = false,
-        this.radius = 0,
+        required this.paddingHorizontal,
         this.isPassword = false,
         required this.controller,
         this.suffix,
@@ -31,7 +31,7 @@ class CustomFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: MediaQuery.of(context).size.width * 0.05,
+        horizontal: paddingHorizontal,
         vertical: MediaQuery.of(context).size.height * 0.01,
       ),
       child: Column(

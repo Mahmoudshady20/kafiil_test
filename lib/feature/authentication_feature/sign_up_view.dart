@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kafiil_test/feature/authentication_feature/widget/sign_up_body.dart';
 
 class SignUpView extends StatelessWidget {
   static const String routeName = 'signup_view';
@@ -6,6 +7,6 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SignUpBody();
   }
 }

@@ -23,6 +23,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
   Widget build(BuildContext context) {
     return  CustomFormField(
       label: widget.label,
+      paddingHorizontal:  MediaQuery.of(context).size.width * 0.05,
       controller: widget.passwordController,
       validator: (value){
         if (value == null || value.trim().isEmpty) {

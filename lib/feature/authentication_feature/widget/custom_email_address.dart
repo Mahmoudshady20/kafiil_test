@@ -10,6 +10,7 @@ class CustomEmailAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomFormField(
         label: 'Email Address',
+        paddingHorizontal:  MediaQuery.of(context).size.width * 0.05,
         controller: emailController,
         validator: (value) {
           if (value == null || value.trim().isEmpty) {

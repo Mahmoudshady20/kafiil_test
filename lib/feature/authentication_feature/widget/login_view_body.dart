@@ -45,8 +45,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 titleName: 'Account Login',
               ),
               const LoginImage(),
-              CustomEmailAddress(emailController: emailController),
+              CustomEmailAddress(emailController: emailController,paddingHorizontal: 0.05,),
               CustomPasswordField(
+                padding: 0.05,
                 passwordController: passwordController,
                 label: 'password',
               ),

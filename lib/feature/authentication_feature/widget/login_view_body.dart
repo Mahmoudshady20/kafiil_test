@@ -61,6 +61,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               CustomAuthButton(
                 buttonLabel: 'Login',
                 onPressed: () {},
+                width: 1,
               ),
               const HaveAccountLogin()
             ],

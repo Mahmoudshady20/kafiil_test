@@ -12,7 +12,7 @@ class HaveAccountLogin extends StatelessWidget {
       children: [
         Text('Don’t have an account ?',style: Theme.of(context).textTheme.titleSmall,),
         TextButton(onPressed: (){
-          Navigator.pushReplacementNamed(context, SignUpView.routeName);
+          Navigator.pushNamed(context, SignUpView.routeName);
         }, child: Text('Register',style: Theme.of(context).textTheme.titleSmall?.copyWith(
           fontWeight: FontWeight.w600,
           fontSize: 15,

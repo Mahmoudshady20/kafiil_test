@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kafiil_test/core/utils/validations_regex.dart';
 import 'package:kafiil_test/shared/widget/custom_form_field.dart';
 
+typedef MyValidator = String? Function(String?)?;
 class CustomPasswordField extends StatefulWidget {
-  const CustomPasswordField({super.key,required this.passwordController,required this.label,required this.padding});
+  const CustomPasswordField({super.key,required this.passwordController,required this.label,required this.padding,required this.passwordValidator,});
   final TextEditingController passwordController;
   final String label;
   final double padding;
+  final MyValidator passwordValidator;
 
   @override
   State<CustomPasswordField> createState() => _CustomPasswordFieldState();
@@ -26,15 +27,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       label: widget.label,
       paddingHorizontal:  MediaQuery.of(context).size.width * widget.padding,
       controller: widget.passwordController,
-      validator: (value){
-        if (value == null || value.trim().isEmpty) {
-          return 'Please enter your Password';
-        }
-        if (!ValidationRegex.passwordRegex(value)){
-          return 'Please enter valid Password';
-        }
-        return null;
-      },
+      validator: widget.passwordValidator,
       isPassword: hidePassword,
       suffix:IconButton(
         onPressed: (){
@@ -53,3 +46,14 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
     );
   }
 }
+/**
+ * (value){
+    if (value == null || value.trim().isEmpty) {
+    return 'Please enter your Password';
+    }
+    if (!ValidationRegex.passwordRegex(value)){
+    return 'Please enter valid Password';
+    }
+    return null;
+    }
+ */

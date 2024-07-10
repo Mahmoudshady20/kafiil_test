@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kafiil_test/shared/widget/custom_form_field.dart';
 
+typedef MyValidator = String? Function(String?)?;
 class CustomNameWidget extends StatelessWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
-  const CustomNameWidget({super.key,required this.firstNameController,required this.lastNameController});
+  final MyValidator firstNameValidator;
+  final MyValidator lastNameValidator;
+  const CustomNameWidget({super.key,required this.firstNameController,required this.lastNameController,required this.firstNameValidator,required this.lastNameValidator});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +24,8 @@ class CustomNameWidget extends StatelessWidget {
               paddingHorizontal: 0,
                 label: 'First Name',
                 controller: firstNameController,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your First Name';
-                  }
-                  return null;
-                }),
+                validator: firstNameValidator,
+          ),
           ),
           const SizedBox(
             width: 10,
@@ -36,15 +35,25 @@ class CustomNameWidget extends StatelessWidget {
               paddingHorizontal: 0,
                 label: 'Last Name',
                 controller: lastNameController,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your Last Name';
-                  }
-                  return null;
-                }),
+                validator: lastNameValidator,
+            ),
           ),
         ],
       ),
     );
   }
 }
+/**
+ * (value) {
+    if (value == null || value.trim().isEmpty) {
+    return 'Please enter your First Name';
+    }
+    return null;
+    }
+    (value) {
+    if (value == null || value.trim().isEmpty) {
+    return 'Please enter your Last Name';
+    }
+    return null;
+    }
+ */

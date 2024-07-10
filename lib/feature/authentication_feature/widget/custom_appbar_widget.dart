@@ -8,10 +8,23 @@ class CustomAppbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:  EdgeInsets.only(
-        left: MediaQuery.of(context).size.width * 0.09,
-        top: MediaQuery.of(context).size.height * 0.07,
+        left: MediaQuery.of(context).size.width * 0.075,
+        top: MediaQuery.of(context).size.height * 0.05,
+        bottom: MediaQuery.of(context).size.height * 0.006,
       ),
-      child: Text(titleName,style: Theme.of(context).textTheme.titleLarge,),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: (){
+              if(titleName=='Register'){
+                Navigator.pop(context);
+              }
+            },
+            child: const Icon(Icons.arrow_back_ios,color: Colors.black,),
+          ),
+          Text(titleName,style: Theme.of(context).textTheme.titleLarge,),
+        ],
+      ),
     );
   }
 }

@@ -1,61 +1,66 @@
 import 'package:flutter/material.dart';
+typedef MyRadio = String? Function(String?)?;
+class RadioButtonWidget extends StatelessWidget {
+  RadioButtonWidget({super.key,required this.typeSelectedRole,required this.sellerRadio,required this.bothRadio,required this.buyerRadio,});
 
-class RadioButtonWidget extends StatefulWidget {
-  const RadioButtonWidget({super.key});
-
-  @override
-  State<RadioButtonWidget> createState() => _RadioButtonWidgetState();
-}
-
-class _RadioButtonWidgetState extends State<RadioButtonWidget> {
-  String _selectedRole = 'Seller';
+  String typeSelectedRole;
+  final MyRadio sellerRadio;
+  final MyRadio buyerRadio;
+  final MyRadio bothRadio;
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Radio(
-          activeColor: const Color(0xFF1DBF73),
-          value: 'Seller',
-          groupValue: _selectedRole,
-          onChanged: (value) {
-            setState(() {
-              _selectedRole = value!;
-            });
-          },
+        const SizedBox(
+          height: 7,
         ),
-        Text('Seller',style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            color: Colors.black
-        ),),
-        Radio(
-          activeColor: const Color(0xFF1DBF73),
-          value: 'Buyer',
-          groupValue: _selectedRole,
-          onChanged: (value) {
-            setState(() {
-              _selectedRole = value!;
-            });
-          },
+        Text(
+          'User Type',
+          style: Theme.of(context).textTheme.titleSmall,
         ),
-        Text('Buyer',style: Theme.of(context).textTheme.titleSmall?.copyWith(
-          color: Colors.black
-        ),),
-        Radio(
-          activeColor: const Color(0xFF1DBF73),
-          value: 'Both',
-          groupValue: _selectedRole,
-          onChanged: (value) {
-            setState(() {
-              _selectedRole = value!;
-            });
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Radio(
+              activeColor: const Color(0xFF1DBF73),
+              value: 'Seller',
+              groupValue: typeSelectedRole,
+
+              onChanged: sellerRadio,
+            ),
+            Text('Seller',style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: Colors.black
+            ),),
+            Radio(
+              activeColor: const Color(0xFF1DBF73),
+              value: 'Buyer',
+              groupValue: typeSelectedRole,
+              // onChanged: (value) {
+              //     typeSelectedRole = value!;
+              // },
+              onChanged: buyerRadio,
+            ),
+            Text('Buyer',style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: Colors.black
+            ),),
+            Radio(
+              activeColor: const Color(0xFF1DBF73),
+              value: 'Both',
+              groupValue: typeSelectedRole,
+              // onChanged: (value) {
+              //     typeSelectedRole = value!;
+              // },
+              onChanged: bothRadio,
+            ),
+            Text('Both',style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: Colors.black
+            ),
+            ),
+            const Spacer()
+          ],
         ),
-        Text('Both',style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            color: Colors.black
-        ),
-        ),
-        const Spacer()
       ],
     );
   }

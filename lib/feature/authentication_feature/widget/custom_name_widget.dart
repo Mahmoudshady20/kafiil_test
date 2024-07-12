@@ -43,17 +43,3 @@ class CustomNameWidget extends StatelessWidget {
     );
   }
 }
-/**
- * (value) {
-    if (value == null || value.trim().isEmpty) {
-    return 'Please enter your First Name';
-    }
-    return null;
-    }
-    (value) {
-    if (value == null || value.trim().isEmpty) {
-    return 'Please enter your Last Name';
-    }
-    return null;
-    }
- */

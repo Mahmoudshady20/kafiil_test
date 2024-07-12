@@ -5,6 +5,18 @@ class MyThemeData {
   static ThemeData myTheme = ThemeData(
     scaffoldBackgroundColor: const Color(0xFFFFFFFF),
     canvasColor: Colors.transparent,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+    ),
+    colorScheme: const ColorScheme.light(
+      surface: Colors.white,
+
+    ),
+    dataTableTheme: DataTableThemeData(
+      dataRowColor: WidgetStateProperty.all(Colors.white),
+      headingRowColor: WidgetStateProperty.all(Colors.white),
+    ),
+
     textTheme: TextTheme(
       /** used in :-
        * 1- account login and register title

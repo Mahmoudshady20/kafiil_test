@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:kafiil_test/feature/authentication_feature/data/user_provider.dart';
 import 'package:kafiil_test/feature/authentication_feature/sign_up_view.dart';
 import 'package:kafiil_test/feature/authentication_feature/login_view.dart';
+import 'package:kafiil_test/feature/home_feature/home_view.dart';
 import 'package:kafiil_test/shared/theme_data/my_theme_data.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider<UserProvider>(
+      create: (context) => UserProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,14 +23,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: LoginView.routeName,
+      initialRoute: HomeView.routeName,
       theme: MyThemeData.myTheme,
       routes: {
-        LoginView.routeName : (context)=> const LoginView(),
-        SignUpView.routeName : (context)=> const SignUpView()
+        LoginView.routeName: (context) => const LoginView(),
+        SignUpView.routeName: (context) => const SignUpView(),
+        HomeView.routeName: (context)=> const HomeView(),
       },
     );
   }
 }
-
-

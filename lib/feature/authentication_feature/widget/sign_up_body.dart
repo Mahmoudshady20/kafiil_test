@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kafiil_test/core/utils/date_utils.dart';
 import 'package:kafiil_test/core/utils/validations_regex.dart';
+import 'package:kafiil_test/feature/authentication_feature/data/user_model.dart';
+import 'package:kafiil_test/feature/authentication_feature/data/user_provider.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/custom_appbar_widget.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/custom_auth_button.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/error_message.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/sign_up_step_one.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/sign_up_step_two.dart';
+import 'package:kafiil_test/feature/home_feature/home_view.dart';
+import 'package:provider/provider.dart';
 
 class SignUpBody extends StatefulWidget {
   const SignUpBody({super.key});
@@ -74,7 +78,9 @@ class _SignUpBodyState extends State<SignUpBody> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const CustomAppbarWidget(titleName: 'Register'),
-              ErrorMessageSignUp(errorMessage: errorMessage,),
+              ErrorMessageSignUp(
+                errorMessage: errorMessage,
+              ),
               Expanded(
                 child: Theme(
                   data: ThemeData(
@@ -112,13 +118,14 @@ class _SignUpBodyState extends State<SignUpBody> {
                             ),
                           ],
                         );
-                      }  if (_index == 1) {
+                      }
+                      if (_index == 1) {
                         return Row(
                           children: [
                             CustomAuthButton(
                               buttonLabel: 'Submit',
                               onPressed: () {
-
+                                register();
                               },
                               width: 0.82,
                             ),
@@ -156,7 +163,10 @@ class _SignUpBodyState extends State<SignUpBody> {
                     steps: [
                       Step(
                         title: Container(),
-                        label: Text('Register', style: Theme.of(context).textTheme.bodySmall,),
+                        label: Text(
+                          'Register',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
                         isActive: _index >= 0,
                         stepStyle: const StepStyle(
                           color: Color(0xFF1DBF73),
@@ -174,13 +184,13 @@ class _SignUpBodyState extends State<SignUpBody> {
                             });
                             return null;
                           },
-                          bothRadio:  (value) {
+                          bothRadio: (value) {
                             setState(() {
                               typeSelectedRole = value!;
                             });
                             return null;
                           },
-                          buyerRadio:  (value) {
+                          buyerRadio: (value) {
                             setState(() {
                               typeSelectedRole = value!;
                             });
@@ -195,23 +205,24 @@ class _SignUpBodyState extends State<SignUpBody> {
                             }
                             return null;
                           },
-                          passwordValidator: (value){
+                          passwordValidator: (value) {
                             if (value == null || value.trim().isEmpty) {
                               return 'Please enter your Password';
                             }
-                            if(passwordController.text.length <8){
+                            if (passwordController.text.length < 8) {
                               return 'Your password must be at least 8 characters';
                             }
-                            if (!ValidationRegex.passwordRegex(value)){
+                            if (!ValidationRegex.passwordRegex(value)) {
                               return 'Your password must consist of a lowercase letter, an uppercase letter, and a number';
                             }
                             return null;
                           },
-                          confirmPasswordValidator: (value){
+                          confirmPasswordValidator: (value) {
                             if (value == null || value.trim().isEmpty) {
                               return 'Please enter your Confirm Password';
                             }
-                            if (passwordController.text != confirmPasswordController.text){
+                            if (passwordController.text !=
+                                confirmPasswordController.text) {
                               return "Password Don't match";
                             }
                             return null;
@@ -239,15 +250,22 @@ class _SignUpBodyState extends State<SignUpBody> {
                           width: 5,
                           color: Colors.black,
                         ),
-                        label: Text('Complete Data', style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: _index < 1 ? const Color(0xFF696F79) : const Color(0xFF1DBF73),
-                        ),),
+                        label: Text(
+                          'Complete Data',
+                          style:
+                              Theme.of(context).textTheme.bodySmall?.copyWith(
+                                    color: _index < 1
+                                        ? const Color(0xFF696F79)
+                                        : const Color(0xFF1DBF73),
+                                  ),
+                        ),
                         stepStyle: StepStyle(
-                          color:
-                              _index == 1 ? const Color(0xFF1DBF73) : Colors.grey,
+                          color: _index == 1
+                              ? const Color(0xFF1DBF73)
+                              : Colors.grey,
                         ),
                         content: SignUpStepTwo(
-                          birthTap: (){},
+                          birthTap: () {},
                           salary: salary,
                           aboutController: aboutController,
                           aboutValidator: (value) {
@@ -255,50 +273,51 @@ class _SignUpBodyState extends State<SignUpBody> {
                           },
                           date: date,
                           genderSelectedRole: genderSelectedRole,
-                          addPressed: (){
+                          addPressed: () {
                             setState(() {
-                              salary+=1;
+                              salary += 1;
                             });
                           },
-                          minPressed: (){
-                            salary-=1;
+                          minPressed: () {
+                            salary -= 1;
                           },
-                          maleRadio: (value){
+                          maleRadio: (value) {
                             setState(() {
                               genderSelectedRole = 'male';
                             });
                             return null;
                           },
-                          feMaleRadio: (value){
+                          feMaleRadio: (value) {
                             setState(() {
                               genderSelectedRole = 'female';
                             });
                             return null;
                           },
                           twitterValue: twitterValue,
-                          twitterOnChanged: (value){
+                          twitterOnChanged: (value) {
                             setState(() {
-                              twitterValue=!twitterValue;
+                              twitterValue = !twitterValue;
                             });
                             return null;
                           },
                           linkedValue: linkedValue,
                           facebookValue: facebookValue,
-                          faceBookOnChanged:  (value){
+                          faceBookOnChanged: (value) {
                             setState(() {
-                              facebookValue=!facebookValue;
+                              facebookValue = !facebookValue;
                             });
                             return null;
                           },
-                          linkedOnChanged:  (value){
+                          linkedOnChanged: (value) {
                             setState(() {
-                              linkedValue=!linkedValue;
+                              linkedValue = !linkedValue;
                             });
                             return null;
                           },
                         ),
-                        state:
-                            _index > 1 ? StepState.complete : StepState.disabled,
+                        state: _index > 1
+                            ? StepState.complete
+                            : StepState.disabled,
                       ),
                     ],
                   ),
@@ -310,12 +329,27 @@ class _SignUpBodyState extends State<SignUpBody> {
       ),
     );
   }
-  register(){
-    if(!formKey.currentState!.validate()){
+
+  register() {
+    if (!formKey.currentState!.validate()) {
       return;
     }
+    UserModel user = UserModel(
+        salary: salary,
+        about: aboutController.text,
+        birthDate: date,
+        emailAddress: emailController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        password: passwordController.text,
+        userType: typeSelectedRole);
+    var userProvider = Provider.of<UserProvider>(context,listen: false);
+    userProvider.updateUser(user);
     setState(() {
       _index += 1;
     });
+    if(_index>1){
+      Navigator.pushReplacementNamed(context, HomeView.routeName);
+    }
   }
 }

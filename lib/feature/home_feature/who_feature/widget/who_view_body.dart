@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kafiil_test/feature/authentication_feature/data/user_provider.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/radio_button_widget.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/skills_widget.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/social_media_widget.dart';
@@ -7,6 +8,7 @@ import 'package:kafiil_test/feature/home_feature/who_feature/widget/custom_text_
 import 'package:kafiil_test/feature/home_feature/who_feature/widget/name_widget.dart';
 import 'package:kafiil_test/feature/home_feature/who_feature/widget/who_password_widget.dart';
 import 'package:kafiil_test/feature/home_feature/widget/home_app_bar.dart';
+import 'package:provider/provider.dart';
 
 class WhoViewBody extends StatefulWidget {
   const WhoViewBody({super.key});
@@ -18,18 +20,17 @@ class WhoViewBody extends StatefulWidget {
 class _WhoViewBodyState extends State<WhoViewBody> {
   late TextEditingController passwordController;
   late bool hidePassword;
-  late String typeSelectedRole;
   @override
   void initState() {
     passwordController = TextEditingController();
     hidePassword = true;
-    typeSelectedRole = 'Seller';
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,17 +57,18 @@ class _WhoViewBodyState extends State<WhoViewBody> {
           const SizedBox(
             height: 20,
           ),
-          const WhoNameWidget(
-            lastName: 'lastName',
-            firstName: 'firstName',
+          WhoNameWidget(
+            lastName: userProvider.userModel?.lastName ?? 'Mahmoud',
+            firstName: userProvider.userModel?.firstName ?? 'Mohamed',
           ),
-          const WhoTextWidget(
-            email: 'Mahmoud@gmail.com',
+          WhoTextWidget(
+            email:
+                userProvider.userModel?.emailAddress ?? 'mahmoud47@gmail.com',
             title: 'Email Address',
             maxLines: 1,
           ),
           WhoPasswordWidget(
-            password: 'password',
+            password: userProvider.userModel?.password ?? 'mahmoud12345',
             hidePassword: hidePassword,
             onTap: () {
               if (hidePassword == false) {
@@ -82,7 +84,8 @@ class _WhoViewBodyState extends State<WhoViewBody> {
               left: MediaQuery.of(context).size.width * 0.05,
             ),
             child: RadioButtonWidget(
-              typeSelectedRole: typeSelectedRole,
+              typeSelectedRole:
+                  userProvider.userModel?.typeSelectedRole ?? 'Seller',
               sellerRadio: (value) {
                 return null;
               },
@@ -94,36 +97,42 @@ class _WhoViewBodyState extends State<WhoViewBody> {
               },
             ),
           ),
-          const WhoTextWidget(
+          WhoTextWidget(
               maxLines: 5,
-              email:
+              email: userProvider.userModel?.about ??
                   'Lorem ipsum dolor sit amet consectetur. Odio urna sed velit et sed quis. Enim ut sed. sed quis. Enim ut sed.',
               title: 'About'),
-          const WhoTextWidget(
-            email: 'SAR 4500',
+          WhoTextWidget(
+            email: userProvider.userModel?.salary.toString() ?? '1200',
             title: 'Salary',
             maxLines: 1,
           ),
-         const BirthDayWidget(),
-         Padding(
-           padding:EdgeInsets.only(
-             left: MediaQuery.of(context).size.width * 0.04,
-             right: MediaQuery.of(context).size.width * 0.04,
-           ),
-           child: const SkillsWidget(),
-         ),
+          const BirthDayWidget(),
           Padding(
-            padding:EdgeInsets.only(
+            padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.04,
               right: MediaQuery.of(context).size.width * 0.04,
             ),
-            child: SocialMediaWidget(faceBookOnChanged: (value){
-              return null;
-            }, linkedOnChanged: (value){
-              return null;
-            }, twitterOnChanged: (value){
-              return null;
-            }, facebookValue: true, linkedValue: false, twitterValue: false),
+            child: const SkillsWidget(),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: MediaQuery.of(context).size.width * 0.04,
+              right: MediaQuery.of(context).size.width * 0.04,
+            ),
+            child: SocialMediaWidget(
+                faceBookOnChanged: (value) {
+                  return null;
+                },
+                linkedOnChanged: (value) {
+                  return null;
+                },
+                twitterOnChanged: (value) {
+                  return null;
+                },
+                facebookValue: userProvider.userModel?.faceBook ?? true,
+                linkedValue: userProvider.userModel?.linked ?? true,
+                twitterValue: userProvider.userModel?.twitter ?? true),
           ),
         ],
       ),

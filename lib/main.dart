@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeView.routeName,
+      initialRoute: LoginView.routeName,
       theme: MyThemeData.myTheme,
       routes: {
         LoginView.routeName: (context) => const LoginView(),

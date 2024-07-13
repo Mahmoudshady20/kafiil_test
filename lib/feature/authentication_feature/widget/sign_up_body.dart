@@ -336,6 +336,10 @@ class _SignUpBodyState extends State<SignUpBody> {
     }
     UserModel user = UserModel(
         salary: salary,
+        faceBook: facebookValue,
+        linked: linkedValue,
+        twitter: twitterValue,
+        typeSelectedRole: typeSelectedRole,
         about: aboutController.text,
         birthDate: date,
         emailAddress: emailController.text,

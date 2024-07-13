@@ -7,6 +7,7 @@ import 'package:kafiil_test/feature/authentication_feature/widget/custom_passwor
 import 'package:kafiil_test/feature/authentication_feature/widget/have_account_login.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/login_image.dart';
 import 'package:kafiil_test/feature/authentication_feature/widget/remember_forget_row.dart';
+import 'package:kafiil_test/feature/home_feature/home_view.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -102,5 +103,6 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     if(!formKey.currentState!.validate()){
       return;
     }
+    Navigator.pushReplacementNamed(context, HomeView.routeName);
   }
 }

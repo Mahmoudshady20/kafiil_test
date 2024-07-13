@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 typedef MyRadio = String? Function(String?)?;
 class RadioButtonWidget extends StatelessWidget {
-  RadioButtonWidget({super.key,required this.typeSelectedRole,required this.sellerRadio,required this.bothRadio,required this.buyerRadio,});
+  const RadioButtonWidget({super.key,required this.typeSelectedRole,required this.sellerRadio,required this.bothRadio,required this.buyerRadio,});
 
-  String typeSelectedRole;
+  final String typeSelectedRole;
   final MyRadio sellerRadio;
   final MyRadio buyerRadio;
   final MyRadio bothRadio;
@@ -49,9 +49,6 @@ class RadioButtonWidget extends StatelessWidget {
               activeColor: const Color(0xFF1DBF73),
               value: 'Both',
               groupValue: typeSelectedRole,
-              // onChanged: (value) {
-              //     typeSelectedRole = value!;
-              // },
               onChanged: bothRadio,
             ),
             Text('Both',style: Theme.of(context).textTheme.titleSmall?.copyWith(
